@@ -11,8 +11,8 @@ public class ArrivalGame {
         int N = scanner.nextInt();
         int[][] exceptions = new int[N][2];
         for (int i = 0; i < N; i++) {
-            exceptions[0][i] = scanner.nextInt();
-            exceptions[1][i] = scanner.nextInt();
+            exceptions[i][0] = scanner.nextInt();
+            exceptions[i][1] = scanner.nextInt();
         }
         System.out.println(minimumDays(S, X, exceptions));
         scanner.close();
@@ -20,22 +20,32 @@ public class ArrivalGame {
 
     public static int minimumDays(int S, int X, int[][] exceptions) {
         Arrays.sort(exceptions, Comparator.comparingInt(arr -> arr[0]));
-        int currentDistance = 0;
-        int currentDay = 1;
-        for (int[] exception : exceptions) {
-            int day = exception[0];
-            int distance = exception[1] - currentDistance;
-            if (distance <= 0) {
-                continue;
-            }
-            currentDistance += distance;
-            currentDay += (distance / X) + (distance % X == 0 ? 0 : 1);
-            if (currentDistance >= S) {
-                return currentDay;
+        int currentDistance = S;
+        int currentDay;
+        
+        // Initial days -->
+        currentDistance = currentDistance - (exceptions[0][0] - 1) * X;
+        currentDay = exceptions[0][0] - 1;
+        
+        // Exception traversal -->
+        int idx = 0;
+        for (int i = exceptions[0][0]; i <= exceptions[exceptions.length - 1][0]; i++) {
+            if (exceptions[idx][0] == i) {
+                currentDistance -= exceptions[idx][1];
+                idx++;
+                currentDay++;
+            } else {
+                currentDistance -= X;
+                currentDay++;
             }
         }
-        int remainingDistance = S - currentDistance;
-        return currentDay + (remainingDistance / X) + (remainingDistance % X == 0 ? 0 : 1);
+        // Extended days of the end -->
+        while (currentDistance > 0) {
+            currentDistance -= X;
+            currentDay++;
+        }
+        
+        return currentDay;
     }
 }   
 
