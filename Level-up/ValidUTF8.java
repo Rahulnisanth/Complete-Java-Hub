@@ -1,6 +1,6 @@
 import java.util.*;
 public class ValidUTF8 {
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         List<Integer> list = extractSequence(input);
@@ -8,7 +8,7 @@ public class ValidUTF8 {
 
         sc.close();
     }
-    
+
     public static boolean validUtf8(List<Integer> data) {
         int remainingBytes = 0;
         for (int value : data) {
