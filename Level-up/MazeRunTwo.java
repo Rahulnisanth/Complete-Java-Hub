@@ -1,19 +1,19 @@
 import java.util.*;
 
-public class MazeRun {
+public class MazeRunTwo {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[][] problem = new int[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++) {
+        for(int i = 0;i < n;i++){
+            for(int j = 0;j < n;j++) {
                 problem[i][j] = sc.nextInt();
             }
         }
         int[][] solution = new int[n][n];
         if(findMaze(0, 0, problem, solution) == true) {
-            for(int i=0;i<n;i++){
-                for(int j=0;j<n;j++) {
+            for(int i = 0;i < n; i++){
+                for(int j = 0;j < n; j++) {
                     System.out.print(solution[i][j] + " ");
                 }
                 System.out.println();
@@ -25,18 +25,27 @@ public class MazeRun {
     }
     private static boolean findMaze(int x, int y, int[][] problem, int[][] solution) {
         int n = problem.length;
-        if(x == n - 1 && y == n - 1) {
+        if(x == n - 1 && y == n - 1 && problem[n - 1][n - 1] != 1) {
             solution[x][y] = 1;
             return true;
-        } if(x >= 0 && x < n && y >= 0 && y < n && problem[x][y] == 0) {
+        } if(x >= 0 && x < n && y >= 0 && y < n && problem[x][y] == 0 && solution[x][y] == 0) {
             solution[x][y] = 1;
+
             // Right :
-            if(findMaze(x + 1, y,problem, solution) == true) {
+            if(findMaze(x, y + 1, problem, solution) == true) {
+                return true;
+            }
+            // Down :
+            if(findMaze(x + 1, y, problem, solution) == true) {
+                return  true;
+            } 
+            // Left :
+            if(findMaze(x, y - 1, problem, solution) == true) {
                 return true;
             } 
-            // Down :
-            if(findMaze(x, y + 1, problem, solution) == true) {
-                return  true;
+            // Up :
+            if(findMaze(x - 1, y, problem, solution) == true) {
+                return true;
             }
             // Backtracks :
             solution[x][y] = 0;
