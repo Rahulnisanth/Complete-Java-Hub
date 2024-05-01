@@ -4,7 +4,7 @@ public class ValidUTF8 {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         List<Integer> list = extractSequence(input);
-        System.err.println(validUtf8(list));
+        System.out.println(validUtf8(list));
 
         sc.close();
     }
