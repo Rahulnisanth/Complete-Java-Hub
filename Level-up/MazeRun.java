@@ -34,10 +34,6 @@ public class MazeRun {
                 return true;
             } if(findMaze(x, y + 1, problem, solution) == true) {
                 return  true;
-            } if(findMaze(x - 1, y, problem, solution) == true) {
-                return true;
-            } if(findMaze(x, y - 1, problem, solution) == true) {
-                return true;
             }
             solution[x][y] = 0;
             return false;
