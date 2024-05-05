@@ -1,10 +1,10 @@
 class Contact {
     private String name;
-    private int phone;
+    private String phone;
     private String email;
     private String location;
 
-    public Contact(String name, int phone, String email, String location) {
+    public Contact(String name, String phone, String email, String location) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -15,7 +15,7 @@ class Contact {
         return name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 

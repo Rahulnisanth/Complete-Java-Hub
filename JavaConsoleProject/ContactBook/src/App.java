@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class App{
     public static void main(String[] args) {
         ContactBook contactBook = new ContactBook();
         Scanner scanner = new Scanner(System.in);
@@ -22,7 +22,7 @@ public class Main {
                     System.out.print("Enter contact name: ");
                     String name = scanner.nextLine();
                     System.out.print("Enter contact phone number: ");
-                    int phone = scanner.nextInt();
+                    String phone = scanner.nextLine();
                     System.out.print("Enter contact email: ");
                     String email = scanner.nextLine();
                     System.out.print("Enter contact location: ");
@@ -31,26 +31,30 @@ public class Main {
                     contactBook.addContact(newContact);
                     System.out.println("Contact added successfully.");
                     break;
-                // case "2":
-                //     contactBook.viewContacts();
-                //     break;
-                // case "3":
-                //     System.out.print("Enter search keyword (name or location)/(phone or email): ");
-                //     String keyword = scanner.nextLine();
-                //     contactBook.searchContact(keyword);
-                //     break;
-                // case "4":
-                //     System.out.print("Enter the name of the contact to update: ");
-                //     String updateName = scanner.nextLine();
-                //     System.out.print("Enter new phone number: ");
-                //     String newPhoneNumber = scanner.nextLine();
-                //     contactBook.updateContact(updateName, newPhoneNumber);
-                //     break;
-                // case "5":
-                //     System.out.print("Enter the name of the contact to delete: ");
-                //     String deleteName = scanner.nextLine();
-                //     contactBook.deleteContact(deleteName);
-                //     break;
+                case "2":
+                    contactBook.viewContacts();
+                    break;
+                case "3":
+                    System.out.print("Enter search keyword (contact name): ");
+                    String keyword = scanner.nextLine();
+                    contactBook.searchContact(keyword);
+                    break;
+                case "4":
+                    System.out.print("Enter contact name to be updated: ");
+                    String updateName = scanner.nextLine();
+                    System.out.print("Enter new phone number: ");
+                    String newPhoneNumber = scanner.nextLine();
+                    System.out.print("Enter new email: ");
+                    String newEmail = scanner.nextLine();
+                    System.out.print("Enter new location: ");
+                    String newLocation = scanner.nextLine();
+                    contactBook.updateContact(updateName, newPhoneNumber, newEmail, newLocation);
+                    break;
+                case "5":
+                    System.out.print("Enter the name of contact to be deleted: ");
+                    String deleteName = scanner.nextLine();
+                    contactBook.deleteContact(deleteName);
+                    break;
                 case "6":
                     System.out.println("Exiting Contact Book...!");
                     scanner.close();
