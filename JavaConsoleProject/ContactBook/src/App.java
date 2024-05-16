@@ -29,7 +29,6 @@ public class App{
                     String location = scanner.nextLine();
                     Contact newContact = new Contact(name, phone, email, location);
                     contactBook.addContact(newContact);
-                    System.out.println("Contact added successfully.");
                     break;
                 case "2":
                     contactBook.viewContacts();
