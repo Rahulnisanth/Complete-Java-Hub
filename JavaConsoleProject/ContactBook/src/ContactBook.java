@@ -5,7 +5,6 @@ class ContactBook {
     private Connection connection;
     private final String url = "jdbc:mysql://localhost:3306/contactbook";
 
-
     public ContactBook() {
         try {
             // Connect to the database
