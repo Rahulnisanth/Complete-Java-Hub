@@ -1,6 +1,6 @@
 import java.util.*;
 /**
- * PrimsAlgorithm
+ * Prims-Algorithm
  */
 public class PrimsAlgorithm {
     static int V;
@@ -40,8 +40,8 @@ public class PrimsAlgorithm {
             mst[u] = true;
             for(int v = 0;v < V; v++) {
                 if(mst[v] == false && graph[u][v] != 0 && graph[u][v] < keys[v]) {
-                    parent[v] = u;
                     keys[v] = graph[u][v];
+                    parent[v] = u;
                 }
             }
         }
