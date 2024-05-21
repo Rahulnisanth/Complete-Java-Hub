@@ -26,8 +26,6 @@ public class BSTTraversal
         }
     }
 
-
-
     public static void preorder(Node node)
     {
         if(node == null) {
@@ -67,7 +65,6 @@ public class BSTTraversal
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         root = insert(null,sc.nextInt());          
-
         for(int i=0;i<n-1;++i)
             insert(root,sc.nextInt());
         // Inorder :
@@ -84,5 +81,4 @@ public class BSTTraversal
         System.out.println();
         sc.close();
     }
-
 }
