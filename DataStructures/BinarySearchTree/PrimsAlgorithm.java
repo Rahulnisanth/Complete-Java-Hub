@@ -27,7 +27,6 @@ public class PrimsAlgorithm {
         int[] keys = new int[V];
         int[] parent = new int[V];
         boolean[] mst = new boolean[V];
-
         for(int i = 0;i < V; i++) {
             keys[i] = Integer.MAX_VALUE;
             mst[i] = false;
