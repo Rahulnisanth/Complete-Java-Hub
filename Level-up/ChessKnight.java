@@ -1,90 +1,68 @@
 import java.util.*;
-
 public class ChessKnight {
+    public static boolean isValid(int x, int y, int n) {
+        return 0 <= x && x < n && 0 <= y && y < n;
+    }
+
+    public static int[][] getPossibleMoves(int x, int y, int n) {
+        int[][] moves = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-2, 1}, {-2, -1}, {-1, 2}, {-1, -2}};
+        int[][] validMoves = new int[8][2];
+        int count = 0;
+        for (int[] move : moves) {
+            int newX = x + move[0];
+            int newY = y + move[1];
+            if (isValid(newX, newY, n)) {
+                validMoves[count][0] = newX;
+                validMoves[count][1] = newY;
+                count++;
+            }
+        }
+        return Arrays.copyOf(validMoves, count);
+    }
+
+    public static int getMinimumSteps(int n, int startX, int startY, int endX, int endY) {
+        Queue<int[]> queue = new LinkedList<>();
+        HashSet<String> visited = new HashSet<>();
+        queue.offer(new int[]{startX, startY});
+        visited.add(startX + "," + startY);
+        int steps = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int[] current = queue.poll();
+                int currentX = current[0];
+                int currentY = current[1];
+                if (currentX == endX && currentY == endY) {
+                    return steps;
+                }
+                int[][] possibleMoves = getPossibleMoves(currentX, currentY, n);
+                for (int[] move : possibleMoves) {
+                    int newX = move[0];
+                    int newY = move[1];
+                    String key = newX + "," + newY;
+                    if (!visited.contains(key)) {
+                        queue.offer(new int[]{newX, newY});
+                        visited.add(key);
+                    }
+                }
+            }
+            steps++;
+        }
+
+        return -1;
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        // Initial Position :
-        int x = sc.nextInt();
-        int y = sc.nextInt();
-        // Target Position :
-        int u = sc.nextInt();
-        int v = sc.nextInt();
-        // Chess Board : Size is irrelevant for this logic
-        int[][] memo = new int[64][64];
-        for(int i = 0;i < 64; i++) {
-            Arrays.fill(memo[i], -1);
-        }
-        boolean[][] visited = new boolean[64][64]; 
-        // Main course :
-        int steps = placeKnightInTarget(x, y, u, v, visited, memo);
-        if (steps != -1) {
-            System.out.println("Steps Count : " + steps);
-        } else {
-            System.out.println("No solution exists");
-        }
+        int n = 8;
+        int x = sc.nextInt() - 1;
+        int y = sc.nextInt() - 1;
+        int u = sc.nextInt() - 1;
+        int v = sc.nextInt() - 1;
+        int result = getMinimumSteps(n, x, y, u, v);
+        System.out.println(result > 0 ? result : -1);
         sc.close();
     }
-
-    // Method to calculate the minimum steps to place the knight in the target place of the board :
-    private static int placeKnightInTarget(int x, int y, int u, int v, boolean[][] visited, int[][] memo) {
-        if (x == u && y == v) {
-            return 0;
-        }
-
-        int n = visited.length;
-        if (x >= 0 && x < n && y >= 0 && y < n && !visited[x][y]) {
-            visited[x][y] = true; 
-            if(memo[x][y] != -1){
-                return memo[x][y];
-            }
-            // Top :
-            int topRight = placeKnightInTarget(x - 2, y + 1, u, v, visited, memo);
-            if (topRight != -1) {
-                memo[x][y] = topRight + 1;
-                return memo[x][y];
-            }
-            int topLeft = placeKnightInTarget(x - 2, y - 1, u, v, visited, memo);
-            if (topLeft != -1) {
-                memo[x][y] = topLeft + 1;
-                return memo[x][y];
-            }
-            // Bottom :
-            int bottomRight = placeKnightInTarget(x + 2, y + 1, u, v, visited, memo);
-            if (bottomRight != -1) {
-                memo[x][y] = bottomRight + 1;
-                return memo[x][y];
-            }
-            int bottomLeft = placeKnightInTarget(x + 2, y - 1, u, v, visited, memo);
-            if (bottomLeft != -1) {
-                memo[x][y] = bottomLeft + 1;
-                return memo[x][y];
-            }
-            // Left :
-            int leftTop = placeKnightInTarget(x - 1, y - 2, u, v, visited, memo);
-            if (leftTop != -1) {
-                memo[x][y] = leftTop + 1;
-                return memo[x][y];
-            }
-            int leftBottom = placeKnightInTarget(x + 1, y - 2, u, v, visited, memo);
-            if (leftBottom != -1) {
-                memo[x][y] = leftBottom + 1;
-                return memo[x][y];
-            }
-            // Right :
-            int rightTop = placeKnightInTarget(x - 1, y + 2, u, v, visited, memo);
-            if (rightTop != -1) {
-                memo[x][y] = rightTop + 1;
-                return memo[x][y];
-            }
-            int rightBottom = placeKnightInTarget(x + 1, y + 2, u, v, visited, memo);
-            if (rightBottom != -1) {
-                memo[x][y] = rightBottom + 1;
-                return memo[x][y];
-            }
-            visited[x][y] = false;  
-            return -1;
-        }
-        return -1;
-    }
 }
+
