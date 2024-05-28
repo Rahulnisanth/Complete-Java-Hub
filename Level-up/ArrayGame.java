@@ -9,8 +9,8 @@ public class ArrayGame {
                 if(n >= 1 && n <= 105){
                     int[] arr = new int[n];
                     for(int j = 0; j < n; j++) {
-                        arr[i] = sc.nextInt();
-                        if(arr[i] < 1 && arr[i] > 109) {
+                        arr[j] = sc.nextInt();
+                        if(arr[j] < 1 && arr[j] > 109) {
                             System.out.println(-1);
                             break;
                         }
