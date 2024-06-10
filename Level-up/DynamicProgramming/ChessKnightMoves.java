@@ -3,11 +3,11 @@ import java.util.Queue;
 
 public class ChessKnightMoves {
     // Chess board
-    private static int[][] board = new int[200][200];
+    private static int[][] board = new int[50][50];
 
     // Valid move checking function
     private static boolean isValid(int x, int y) {
-        return x >= 0 && x < 200 && y >= 0 && y < 200;
+        return x >= 0 && x < 50 && y >= 0 && y < 50;
     }
 
     // Marking function
@@ -21,7 +21,7 @@ public class ChessKnightMoves {
         queue.offer(new int[]{startX, startY});
 
         // Visited 2D array for tracking all the x,y
-        boolean[][] visited = new boolean[200][200];
+        boolean[][] visited = new boolean[50][50];
         visited[startX][startY] = true;
 
         // Traversing the queue
