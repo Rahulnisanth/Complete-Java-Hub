@@ -49,6 +49,26 @@ public class LinkedList {
 		}
         return;
 	}
+	// Deletion :
+	public static boolean delete(int val) {
+		Node temp = head;
+		Node prev = null;
+		// case in first node :
+		if(temp != null && temp.data == val) {
+			head = temp.next;
+			return true;
+		}
+		// Case in middle & end :
+		while(temp != null && temp.data != val) {
+			prev = temp;
+			temp = temp.next;
+		} if(temp == null) {
+			System.out.println(val + " Not in list");
+			return false;
+		} 
+		prev.next = temp.next;
+		return true;
+	}
 	// Display :
 	public static void display() {
 		Node temp = head;
@@ -62,18 +82,13 @@ public class LinkedList {
 	public static void main(String[] args)
 	{
 		Scanner sc = new Scanner(System.in);
-		add(10);
-		add(20);
-		add(30);
-		add(40);
-		int position = sc.nextInt(); //position to insert
-		int value = sc.nextInt(); //value to insert
-		if(position < 1 || position >= listSize) {
-			System.out.println("Invalid position at " + position);
-		} else {
-			insert(value, position);
-			display();
+		int n = sc.nextInt();
+		for(int i=0;i<n;i++) {
+			add(sc.nextInt());
 		}
+		int k = sc.nextInt();
+		if(delete(k)) 
+			display();
 		sc.close();
 	}
 }
