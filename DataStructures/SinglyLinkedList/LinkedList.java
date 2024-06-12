@@ -4,9 +4,6 @@ import java.util.*;
 class Node {
 	int data;
 	Node next;
-	Node(){
-		this.next = null;
-	}
 	Node(int d)
 	{
 		data = d;
@@ -16,30 +13,30 @@ class Node {
 // Linked - List :
 public class LinkedList {
 
-	static Node head, tail; //by default initialized to null
+	static Node head, tail;
 	static int listSize = 0;
 	// Adding elements :
-	public static void add(int data) {
+	public void add(int data) {
 		Node temp = new Node(data);
 		temp.next = null;
 		if(head == null) head = tail = temp;
 		else {
-				tail.next = temp;
-				tail = temp;
+			tail.next = temp;
+			tail = temp;
 		}
 		listSize++;
 	}
 	// Inserting at specific position :
-	public static void insert(int value,int position)
+	public void insert(Node node, int value, int position)
 	{
 		Node newNode = new Node(value);
 		newNode.next = null;
 		if(position == 1) {
-			newNode.next = head;
-			head = newNode;
+			newNode.next = node;
+			node = newNode;
 			listSize++;
 		} else {
-			Node temp = head;
+			Node temp = node;
 			while(--position > 1) {
 				temp = temp.next;
 			}
@@ -50,12 +47,12 @@ public class LinkedList {
         return;
 	}
 	// Deletion :
-	public static boolean delete(int val) {
-		Node temp = head;
+	public boolean delete(Node node, int val) {
+		Node temp = node;
 		Node prev = null;
 		// case in first node :
 		if(temp != null && temp.data == val) {
-			head = temp.next;
+			node = temp.next;
 			return true;
 		}
 		// Case in middle & end :
@@ -69,9 +66,22 @@ public class LinkedList {
 		prev.next = temp.next;
 		return true;
 	}
+	// Reversal :
+	public void reverse(Node node) {
+		Node prev = null;
+		Node current = node;
+		Node post = null;
+		while(current != null) {
+			post = current.next;  
+			current.next = prev;  
+			prev = current;       
+			current = post;
+		}
+		display(prev);
+	}
 	// Display :
-	public static void display() {
-		Node temp = head;
+	public void display(Node node) {
+		Node temp = node;
 		while (temp != null) {
 			System.out.print(temp.data + " ");
 			temp = temp.next;
@@ -81,14 +91,16 @@ public class LinkedList {
 	
 	public static void main(String[] args)
 	{
+		LinkedList sll = new LinkedList();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		for(int i=0;i<n;i++) {
-			add(sc.nextInt());
+		for(int i = 0;i < n; i++) {
+			sll.add(sc.nextInt());
 		}
-		int k = sc.nextInt();
-		if(delete(k)) 
-			display();
+		// int k = sc.nextInt();
+		// if(sll.delete(head, k)) 
+		sll.reverse(head);
+		// sll.display(head);
 		sc.close();
 	}
 }
