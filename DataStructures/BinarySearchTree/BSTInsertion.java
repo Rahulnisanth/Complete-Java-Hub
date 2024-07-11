@@ -10,22 +10,21 @@ class Node {
     }
 }
 
-
 public class BSTInsertion
 {
     static Node root;
 
-    public static void inorder(Node node)
+    public static void display(Node node)
     {
         if(node == null) {
             return;
         } else {
-            inorder(node.left);
+            display(node.left);
+            display(node.right);
             System.out.println(node.data);
-            inorder(node.right);
         }
     }
-    // Insertion :
+
     public static Node insert(Node node, int key) {
         if (node == null) 
             return new Node(key);
@@ -44,12 +43,10 @@ public class BSTInsertion
         n = sc.nextInt();
         root = insert(null,sc.nextInt());          
 
-        for(int i=0;i<n-1;++i)
+        for(int i = 0;i < n; ++i)
             insert(root,sc.nextInt());
 
-        // Inorder printing :
-        System.out.print("Inorder Traversal: ");
-        inorder(root);
+        display(root);
         
         sc.close();
     }
