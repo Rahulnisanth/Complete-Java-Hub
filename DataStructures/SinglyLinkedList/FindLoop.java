@@ -15,7 +15,8 @@ public class FindLoop {
 		Node node = head;
 		HashSet<Integer> set =new HashSet<>();
 		while(node != null) {
-			if(set.add(node.data) == false) return true;
+			if(set.add(node.data) == false) 
+				return true;
 			node = node.next;
 		}
 		return false;
